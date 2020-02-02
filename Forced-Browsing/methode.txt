@@ -1,0 +1,9 @@
+burpsuite -> spider this host
+
+
+Hummm interessant on voit un .hidden/
+Allons voir ....
+
+Un gros bazard, des readme troll de partout
+Solution : python :)
+

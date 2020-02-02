@@ -1,0 +1,6 @@
+The flag is : 1d4855f7337c0c14b6f44946872c4eb33853f40b2d54393fbe94f49f1e19bbb0
+
+
+http://localhost:8080/index.php?page=recover#
+
+Avec le debugeur, changer l'adresse mail pour le reset du mot de passe

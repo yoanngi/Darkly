@@ -1,0 +1,11 @@
+http://localhost:8042/index.php?page=feedback
+
+input:
+
+name: Hacked
+Message: <html><body onload=console.log('test1')></html>c
+
+
+Solution de protection:
+
+utiliser htmlsplecialchar
