@@ -1,9 +1,0 @@
-source wordlist:
-
-https://github.com/danielmiessler/SecLists/tree/master/Passwords
-https://github.com/danielmiessler/SecLists/blob/master/Passwords/darkweb2017-top100.txt
-
-On prend la liste des 100 mdp des plus repandu sur le dark,
-on lance un script python afin de verifier si il n'y a pas un mot de passe a la con quelques part
-
-et magique: The flag is : b3a6e43ddf8b4bbb4125e5e7d23040433827759d4de1c04ea63907479a80a6b2

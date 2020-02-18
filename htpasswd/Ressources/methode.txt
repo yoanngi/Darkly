@@ -1,0 +1,34 @@
+Lors du scan de notre cible:
+$ nmap --script=http-enum 192.168.56.103
+Starting Nmap 7.70 ( https://nmap.org ) at 2020-02-18 13:12 CET
+Nmap scan report for 192.168.56.103
+Host is up (0.10s latency).
+Not shown: 998 closed ports
+PORT     STATE SERVICE
+80/tcp   open  http
+| http-enum:
+|   /admin/: Possible admin folder
+|   /admin/index.php: Possible admin folder
+|   /test.php: Test page
+|_  /robots.txt: Robots file
+4242/tcp open  vrml-multi-use
+
+En regardant notre page robots.txt, on peux remarquer:
+User-agent: *
+Disallow: /whatever
+Disallow: /.hidden
+
+Un dossier Whatever ?
+
+En allant dessus, on peux telecharger un fichier htpasswd qui contient:
+root:8621ffdbc5698829397d97767ac13db3
+
+on decode le hash sur https://md5decrypt.net/en/
+
+8621ffdbc5698829397d97767ac13db3 : dragon
+
+On test sur /admin/ et hop on a le flag
+
+
+Solution:
+- Ne pas laisser accessible un fichier htpasswd!

