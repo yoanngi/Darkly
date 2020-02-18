@@ -3,16 +3,14 @@ En analysant le code source, on peux voir :
 	<p><br /><br /><br/><a href="?page=media&src=nsa"><img src="images/nsa_prism.jpg" alt="" /></a></p>
 
 
-peux t-on choisir la source nous meme ?? On va tester sa
+Peux t-on choisir la source nous meme ?
 <a href="?page=media&src=nsa">
 
 
 On tente avec une xss en clair
 <script>alert('XSS');</script>
 
-Nop, et si on l'encodait en base64 ?
-
-http://localhost:8042/?page=media&src=data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk7PC9zY3JpcHQ+
+Non, et si on l'encodait en base64 ?
+http://192.168.56.103/?page=media&src=data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk7PC9zY3JpcHQ+
 
 Bingo !
-

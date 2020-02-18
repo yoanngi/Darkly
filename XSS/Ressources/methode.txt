@@ -1,11 +1,10 @@
-http://localhost:8042/index.php?page=feedback
+Page: http://192.168.56.103/?page=feedback
 
-input:
+Input:
 
-name: Hacked
+name: Pwn
 Message: <html><body onload=console.log('test1')></html>c
 
 
 Solution de protection:
-
 utiliser htmlsplecialchar

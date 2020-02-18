@@ -1,0 +1,10 @@
+Sur la page recover, nous avons un boutton pour reset le mot de passe.
+http://192.168.56.103/index.php?page=recover#
+
+En inspectnt la page, l'adresse mail est en dur dans le code. 
+
+En utilisant le debugger du navigateur, on edit l'adresse mail.
+
+
+
+Avec le debugeur, changer l'adresse mail pour le reset du mot de passe
