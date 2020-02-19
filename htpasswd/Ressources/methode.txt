@@ -27,7 +27,12 @@ on decode le hash sur https://md5decrypt.net/en/
 
 8621ffdbc5698829397d97767ac13db3 : dragon
 
+user: root
+pwd : dragon
+
 On test sur /admin/ et hop on a le flag
+
+The flag is : d19b4823e0d5600ceed56d5e896ef328d7a2b9e7ac7e80f4fcdb9b10bcb3e7ff
 
 
 Solution:
