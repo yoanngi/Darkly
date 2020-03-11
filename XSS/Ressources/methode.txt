@@ -1,0 +1,11 @@
+Page: http://192.168.56.103/?page=feedback
+
+Input:
+
+name: Pwn
+Message: <html><body onload=console.log('test1')></html>c
+
+THE FLAG IS : 0FBB54BBF7D099713CA4BE297E1BC7DA0173D8B3C21C1811B916A3A86652724
+
+Solution de protection:
+utiliser htmlsplecialchar
